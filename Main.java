@@ -1,24 +1,30 @@
-import java.util.*;
-
 public class Main {
     public static void main(String[] args) {
-        GradeBook gradeBook = new GradeBook();
+        Schedule mySchedule = new Schedule();
 
-        // створюємо студентів одразу зі списком оцінок
-        Student s1 = new Student("101", "Іван Петренко", new ArrayList<>(Arrays.asList(90, 85, 95)));
-        Student s2 = new Student("102", "Олена Коваленко", new ArrayList<>(Arrays.asList(100, 88, 92)));
+        Lesson math = new Lesson("M101", "Вища Математика", "08:30");
+        Lesson history = new Lesson("H202", "Історія України", "10:15");
+        Lesson programming = new Lesson("CS50", "Java Programming", "12:00");
 
-        gradeBook.addStudent(s1);
-        gradeBook.addStudent(s2);
+        mySchedule.addClass(math);
+        mySchedule.addClass(history);
+        mySchedule.addClass(programming);
 
-        System.out.println("=== Усі студенти ===");
-        gradeBook.printAllStudents();
+        System.out.println("=== Мій Розклад Занять ===");
+        mySchedule.printAllClasses();
 
-        System.out.println("\nПошук студента з ID = 101:");
-        System.out.println(gradeBook.findStudent("101"));
+        System.out.println("\n=== Пошук заняття CS50 ===");
+        Lesson foundLesson = mySchedule.findClass("CS50");
+        if (foundLesson != null) {
+            System.out.println("Знайдено: " + foundLesson);
+        } else {
+            System.out.println("Заняття не знайдено.");
+        }
 
-        gradeBook.removeStudent("102");
-        System.out.println("\nПісля видалення студента 102:");
-        gradeBook.printAllStudents();
+        System.out.println("\n=== Видалення заняття H202 ===");
+        mySchedule.removeClass("H202");
+
+        System.out.println("\n=== Розклад після оновлення ===");
+        mySchedule.printAllClasses();
     }
 }
